@@ -791,12 +791,21 @@ public class Principal extends javax.swing.JFrame {
 
     private void pop_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pop_eliminarActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_pop_eliminarActionPerformed
 
     private void pop_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pop_editarActionPerformed
         // TODO add your handling code here:
         
-        
+         if (jList1.getSelectedIndex() >= 0) {
+            DefaultListModel modeloLISTA
+                    = (DefaultListModel) jList1.getModel();
+            ((Jugadores) modeloLISTA.get(
+                    jList1.getSelectedIndex()) ).
+                    setNombre(JOptionPane.showInputDialog("nombre"));
+            jList1.setModel(modeloLISTA);
+
+        }
         
     }//GEN-LAST:event_pop_editarActionPerformed
 
