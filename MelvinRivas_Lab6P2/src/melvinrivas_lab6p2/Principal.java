@@ -68,6 +68,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
+        popup_modificar = new javax.swing.JPopupMenu();
+        pop_eliminar = new javax.swing.JMenuItem();
+        pop_editar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -322,6 +325,16 @@ public class Principal extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
+        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jList1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
@@ -395,6 +408,22 @@ public class Principal extends javax.swing.JFrame {
             TrasferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        pop_eliminar.setText("Eliminar");
+        pop_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pop_eliminarActionPerformed(evt);
+            }
+        });
+        popup_modificar.add(pop_eliminar);
+
+        pop_editar.setText("Editar");
+        pop_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pop_editarActionPerformed(evt);
+            }
+        });
+        popup_modificar.add(pop_editar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -741,6 +770,36 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenu1MouseClicked
 
+    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jList1KeyPressed
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        // TODO add your handling code here:
+        
+                if (jList1.getSelectedIndex() >= 0) {
+            if (evt.isMetaDown()) {
+                popup_modificar.show(evt.getComponent(),
+                        evt.getX(), evt.getY());
+
+            }
+        }
+        
+    }//GEN-LAST:event_jList1MouseClicked
+
+    private void pop_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pop_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pop_eliminarActionPerformed
+
+    private void pop_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pop_editarActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_pop_editarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -826,5 +885,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem op1;
     private javax.swing.JMenuItem op2;
     private javax.swing.JMenuItem op3;
+    private javax.swing.JMenuItem pop_editar;
+    private javax.swing.JMenuItem pop_eliminar;
+    private javax.swing.JPopupMenu popup_modificar;
     // End of variables declaration//GEN-END:variables
 }
