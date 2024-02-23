@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -123,6 +125,11 @@ public class Principal extends javax.swing.JFrame {
         ingresarequipo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         ingresarequipo.setForeground(new java.awt.Color(0, 0, 0));
         ingresarequipo.setText("Ingresar");
+        ingresarequipo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ingresarequipoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -808,6 +815,15 @@ public class Principal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_pop_editarActionPerformed
+
+    private void ingresarequipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarequipoMouseClicked
+        // TODO add your handling code here:
+        
+         DefaultTreeModel m = (DefaultTreeModel) jTree1.getModel();
+        DefaultMutableTreeNode raiz
+                = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode nodo_equipo;
+    }//GEN-LAST:event_ingresarequipoMouseClicked
 
     /**
      * @param args the command line arguments
