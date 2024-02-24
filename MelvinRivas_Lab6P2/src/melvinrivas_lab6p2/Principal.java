@@ -43,7 +43,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         agregarpais = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        equipo = new javax.swing.JTextField();
+        equipo2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         agregarcuidad = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -104,8 +104,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Nombre del equipo: ");
 
-        equipo.setBackground(new java.awt.Color(255, 255, 255));
-        equipo.setForeground(new java.awt.Color(0, 0, 0));
+        equipo2.setBackground(new java.awt.Color(255, 255, 255));
+        equipo2.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -146,7 +146,7 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(equipo))
+                                .addComponent(equipo2))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(40, 40, 40)
@@ -176,7 +176,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(equipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,11 +327,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel13.setText("Jugadores");
 
         jList1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jList1MouseClicked(evt);
@@ -348,6 +343,11 @@ public class Principal extends javax.swing.JFrame {
         jButton6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setText("Transferir ->");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -358,6 +358,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Equipos");
 
+        jTree1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Equipos");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane2.setViewportView(jTree1);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -398,9 +401,9 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
-                        .addContainerGap(49, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(158, 158, 158))))
         );
@@ -820,10 +823,36 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
          DefaultTreeModel m = (DefaultTreeModel) jTree1.getModel();
-        DefaultMutableTreeNode raiz
+        DefaultMutableTreeNode nodo_equipos
                 = (DefaultMutableTreeNode) m.getRoot();
-        DefaultMutableTreeNode nodo_equipo;
+        DefaultMutableTreeNode pais;
+        pais = new DefaultMutableTreeNode(agregarpais.getText());
+        
+        DefaultMutableTreeNode equipo =
+                new DefaultMutableTreeNode(equipo2.getText());
+        
+        
+        DefaultMutableTreeNode jugador =
+                new DefaultMutableTreeNode();
+        
+
+         equipo.add(jugador);
+        pais.add(equipo);
+        nodo_equipos.add(pais);
+        m.reload();
+        
+        JOptionPane.showMessageDialog(this, "Valores ingresados correctamente");
+        agregarpais.setText("");
+        equipo2.setText("");
+        agregarcuidad.setText("");
+        agregarestadio.setText("");
+        
     }//GEN-LAST:event_ingresarequipoMouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -874,7 +903,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField agregarnombre;
     private javax.swing.JTextField agregarpais;
     private javax.swing.JComboBox<String> agregarposicion;
-    private javax.swing.JTextField equipo;
+    private javax.swing.JTextField equipo2;
     private javax.swing.JButton ingresarequipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
