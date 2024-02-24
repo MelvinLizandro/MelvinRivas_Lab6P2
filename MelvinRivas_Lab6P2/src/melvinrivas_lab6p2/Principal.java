@@ -813,7 +813,7 @@ public class Principal extends javax.swing.JFrame {
             jList1.setModel(modeloLISTA);
 
         }
-        
+        //a
     }//GEN-LAST:event_pop_editarActionPerformed
 
     private void ingresarequipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarequipoMouseClicked
