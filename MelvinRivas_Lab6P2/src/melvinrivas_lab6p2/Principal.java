@@ -18,8 +18,10 @@ import javax.swing.tree.DefaultTreeModel;
 public class Principal extends javax.swing.JFrame {
 
     
-    static ArrayList <Jugadores> juga = new ArrayList();
-    DefaultListModel modelo = new DefaultListModel();
+    public static ArrayList <Jugadores> juga = new ArrayList();
+    private DefaultListModel modelo = new DefaultListModel();
+    private DefaultMutableTreeNode elegido;
+   
     /**
      * Creates new form Principal
      */
@@ -71,8 +73,10 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         popup_modificar = new javax.swing.JPopupMenu();
-        pop_eliminar = new javax.swing.JMenuItem();
         pop_editar = new javax.swing.JMenuItem();
+        pop_borrar = new javax.swing.JMenuItem();
+        pop_tree = new javax.swing.JPopupMenu();
+        pop_eliminar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -98,6 +102,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel4.setText("Pais del equipo: ");
 
         agregarpais.setBackground(new java.awt.Color(255, 255, 255));
+        agregarpais.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         agregarpais.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -105,6 +110,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel5.setText("Nombre del equipo: ");
 
         equipo2.setBackground(new java.awt.Color(255, 255, 255));
+        equipo2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         equipo2.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -112,6 +118,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel6.setText("Cuidad:");
 
         agregarcuidad.setBackground(new java.awt.Color(255, 255, 255));
+        agregarcuidad.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         agregarcuidad.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -119,12 +126,13 @@ public class Principal extends javax.swing.JFrame {
         jLabel7.setText("Estadio:");
 
         agregarestadio.setBackground(new java.awt.Color(255, 255, 255));
+        agregarestadio.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         agregarestadio.setForeground(new java.awt.Color(0, 0, 0));
 
         ingresarequipo.setBackground(new java.awt.Color(255, 255, 255));
-        ingresarequipo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        ingresarequipo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         ingresarequipo.setForeground(new java.awt.Color(0, 0, 0));
-        ingresarequipo.setText("Ingresar");
+        ingresarequipo.setText("Agregar");
         ingresarequipo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ingresarequipoMouseClicked(evt);
@@ -146,11 +154,7 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(equipo2))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(agregarpais, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(equipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,11 +162,15 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(agregarcuidad)
-                                    .addComponent(agregarestadio)))))
+                                    .addComponent(agregarestadio)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(agregarpais))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(ingresarequipo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,12 +188,12 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(agregarcuidad, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(agregarcuidad, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(agregarestadio, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(ingresarequipo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
@@ -361,6 +369,16 @@ public class Principal extends javax.swing.JFrame {
         jTree1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Equipos");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
+        jTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jTree1ValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTree1);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -368,15 +386,15 @@ public class Principal extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 248, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(219, 219, 219))
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -384,7 +402,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+                .addGap(93, 93, 93))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,14 +437,6 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pop_eliminar.setText("Eliminar");
-        pop_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pop_eliminarActionPerformed(evt);
-            }
-        });
-        popup_modificar.add(pop_eliminar);
-
         pop_editar.setText("Editar");
         pop_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -434,6 +444,22 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         popup_modificar.add(pop_editar);
+
+        pop_borrar.setText("Eliminar");
+        pop_borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pop_borrarActionPerformed(evt);
+            }
+        });
+        popup_modificar.add(pop_borrar);
+
+        pop_eliminar.setText("Eliminar");
+        pop_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pop_eliminarActionPerformed(evt);
+            }
+        });
+        pop_tree.add(pop_eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -800,8 +826,22 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jList1MouseClicked
 
     private void pop_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pop_eliminarActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+int response = JOptionPane.showConfirmDialog(
+                this,
+                "Seguro de Eliminar?",
+                "Confirm",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
 
+        if (response == JOptionPane.OK_OPTION) {
+            DefaultTreeModel m
+                    = (DefaultTreeModel) jTree1.getModel();
+            m.removeNodeFromParent(
+                    elegido);
+            m.reload();
+        }
+        
     }//GEN-LAST:event_pop_eliminarActionPerformed
 
     private void pop_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pop_editarActionPerformed
@@ -832,11 +872,7 @@ public class Principal extends javax.swing.JFrame {
                 new DefaultMutableTreeNode(equipo2.getText());
         
         
-        DefaultMutableTreeNode jugador =
-                new DefaultMutableTreeNode();
-        
 
-         equipo.add(jugador);
         pais.add(equipo);
         nodo_equipos.add(pais);
         m.reload();
@@ -851,9 +887,40 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-
+        
+        DefaultListModel modelo = (DefaultListModel) jList1.getModel();
+        DefaultTreeModel m = (DefaultTreeModel) jTree1.getModel();
+        DefaultMutableTreeNode posicion = new DefaultMutableTreeNode(((Jugadores) modelo.get(jList1.getSelectedIndex())).getNombre());
+        DefaultMutableTreeNode n = new DefaultMutableTreeNode(modelo.get(jList1.getSelectedIndex()));
+        posicion.add(n);
+        m.insertNodeInto(posicion,elegido,elegido.getChildCount());
+        
+        
     }//GEN-LAST:event_jButton6MouseClicked
 
+    private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
+        // TODO add your handling code here:
+        elegido = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
+        
+    }//GEN-LAST:event_jTree1ValueChanged
+
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+        // TODO add your handling code here:
+             if (jList1.getSelectedIndex() >= 0) {
+            if (evt.isMetaDown()) {
+                pop_tree.show(evt.getComponent(),
+                        evt.getX(), evt.getY());
+
+            }
+        }
+    }//GEN-LAST:event_jTree1MouseClicked
+
+    private void pop_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pop_borrarActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_pop_borrarActionPerformed
+// a
     /**
      * @param args the command line arguments
      */
@@ -939,8 +1006,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem op1;
     private javax.swing.JMenuItem op2;
     private javax.swing.JMenuItem op3;
+    private javax.swing.JMenuItem pop_borrar;
     private javax.swing.JMenuItem pop_editar;
     private javax.swing.JMenuItem pop_eliminar;
+    private javax.swing.JPopupMenu pop_tree;
     private javax.swing.JPopupMenu popup_modificar;
     // End of variables declaration//GEN-END:variables
 }
