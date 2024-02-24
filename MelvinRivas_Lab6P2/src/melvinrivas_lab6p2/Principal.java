@@ -19,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
 
     
     public static ArrayList <Jugadores> juga = new ArrayList();
+    public static ArrayList <Equipos> equi = new ArrayList();
     private DefaultListModel modelo = new DefaultListModel();
     private DefaultMutableTreeNode elegido;
    
@@ -882,6 +883,8 @@ int response = JOptionPane.showConfirmDialog(
         equipo2.setText("");
         agregarcuidad.setText("");
         agregarestadio.setText("");
+        
+        
         
     }//GEN-LAST:event_ingresarequipoMouseClicked
 
